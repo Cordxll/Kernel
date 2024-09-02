@@ -1,0 +1,12 @@
+--create image
+docker build buildenv -t mykernel
+
+--spin up
+docker run --rm -it -v $(pwd):/root/env mykernel
+
+
+--create iso file for os
+make build-x86_64
+
+--qemu run your os 
+qemu-system-x86_64 -cdrom dist/x86_64/kernel.iso
